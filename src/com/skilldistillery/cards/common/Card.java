@@ -5,7 +5,7 @@ public class Card {
 	private Rank rank;
 	private Suit suit;
 	
-	private int getValue() {
+	public int getValue() {
 		return rank.getValue();
 	}
 
