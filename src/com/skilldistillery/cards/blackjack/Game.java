@@ -1,37 +1,44 @@
 package com.skilldistillery.cards.blackjack;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.skilldistillery.cards.common.Card;
 import com.skilldistillery.cards.common.Deck;
 
 public class Game {
+	// create dealer and player
+	private Dealer dealer = new Dealer();
+	private Player player = new Player();
 	private Deck deck = new Deck();
 
 	private void start(Scanner scanner) {
-		deck.shuffle();
+		// dealer deals
+		// create hands
+		Deck dealerHand = dealer.getDeck(); //.shuffle();
+		Hand playerHand = player.getHand();
 
-		System.out.println("How many cards do you want?");
-		int howMany = 0;
-		try {
-			howMany = scanner.nextInt();
-		} catch (InputMismatchException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			System.out.println("That's not a number");
-
+		// player can choose Hit or Stay
+		System.out.println("Player, do you want to HIT or STAY (type hit or stay)");
+		String playerChoice = scanner.next();
+		
+		Card dealt = deck.dealCard();
+		
+		if(playerChoice.equalsIgnoreCase("hit")) {
+			playerHand.addCard(dealt);
+		} 
+		else {
+			playerHand.getValueOfHand();
 		}
-		if (howMany > 52) {
-			System.out.println("Not enough cards for that");
-			return; // WILL NEED TO ACCOUNT FOR USER ASKING FOR TOO MANY
-		}
+		
+//		if(dealerHand.getValueOfHand < 17) {
+//		dealerHand.addCard(dealt);
+//		} 
+		
+		// compare who is higher but <= 21 is the winner
+		
+		// if dealer < 17 call dealCard() ELSE stay
+		// if dealer or player >= 21 GAME OVER
 
-		for (int i = 0; i < howMany; i++) {
-			Card card = deck.dealCard();
 
-			System.out.println(card);
-		}
-		System.out.println("There are " + deck.checkDeckSize() + "cards left.");
 	}
 }

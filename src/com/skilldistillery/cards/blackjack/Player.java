@@ -1,6 +1,6 @@
 package com.skilldistillery.cards.blackjack;
 
-public class Player {
+public class Player{
 	public String name;
 	public Hand hand;
 	public double wallet;
