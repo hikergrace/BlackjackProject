@@ -6,16 +6,16 @@ import java.util.Scanner;
 import com.skilldistillery.cards.common.Card;
 import com.skilldistillery.cards.common.Deck;
 
-public class Dealing {
+public class GameApp {
 	private Deck deck = new Deck();
 
 	public static void main(String[] args) {
-		Dealing dealing = new Dealing();
+		GameApp dealing = new GameApp();
 		Scanner scanner = new Scanner(System.in);
 		scanner.close();
 	}
 	
-	private void startI(Scanner scanner) {
+	private void start(Scanner scanner) {
 		deck.shuffle();
 		
 		System.out.println("How many cards do you want?");
