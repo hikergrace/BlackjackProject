@@ -9,30 +9,28 @@ import com.skilldistillery.cards.common.Deck;
 public class Dealer {
 	
 	private Hand hand = new Hand();
+	private Deck deck = new Deck();
 	
 	public Hand getHand() {
 		return hand;
-	}
-
-	private Deck deck = new Deck();
-	
-	private void shuffle() {
-		Collections.shuffle((List<Card>) deck);
-	}
-	
-	private Card dealsCard() {
-		return deck.dealCard();
 	}
 
 	public Deck getDeck() {
 		return deck;
 	}
 
-//	public int getValueOfHand() {
-//		int counter = 0;
-//		for (Card card : hand) {
-//			counter += card.getValue();
-//		}
-//		return counter;
+	public int getValueOfHand() {
+		int counter = 0;
+		for (Card card : hand.getCardsInHand()) {
+			counter += card.getValue();
+		}
+		return counter;
 	}
-//}
+	
+	public boolean dealerBusted() {
+		if (getValueOfHand() > 21) {
+			return true;
+		}
+		return false;
+	}
+}

@@ -36,4 +36,15 @@ public class Hand {
 	public void clearHand() {
 		hand = new ArrayList<Card>();
 	}
+	public Card getTopCard() {
+		return hand.get(0);
+	}
+
+	@Override
+	public String toString() {
+		return  hand.toString();
+	}
+	
+	
+	
 }

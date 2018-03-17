@@ -1,23 +1,24 @@
 package com.skilldistillery.cards.blackjack;
 
-public class Player{
-	public String name;
-	public Hand hand;
-	public double wallet;
+import com.skilldistillery.cards.common.Card;
 
-	public String getName() {
-		return name;
+public class Player{
+	private String name;
+	private Hand hand;
+	private double wallet;
+
+	public Player() {
+		hand = new Hand();
 	}
 
-	public Player(String name, Hand hand, double wallet) {
-		super();
+	public Player(String name, double wallet) {
+		this();
 		this.name = name;
-		this.hand = hand;
 		this.wallet = wallet;
 	}
 
-	public Player() {
-
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
@@ -39,4 +40,20 @@ public class Player{
 	public void setWallet(double wallet) {
 		this.wallet = wallet;
 	}
+	
+	public int getValueOfHand() {
+		int counter = 0;
+		for (Card card : hand.getCardsInHand()) {
+			counter += card.getValue();
+		}
+		return counter;
+	}
+	
+	public boolean playerBusted() {
+		if (getValueOfHand() > 21) {
+			return true;
+		}
+		return false;
 }
+}
+
