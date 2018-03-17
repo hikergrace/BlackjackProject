@@ -7,11 +7,11 @@ import com.skilldistillery.cards.common.Card;
 
 public class Hand {
 	private List<Card> hand;
-	
+
 	public Hand() {
 		hand = new ArrayList<Card>();
 	}
-	
+
 	public Hand(List<Card> hand) {
 		super();
 		this.hand = hand;
@@ -32,19 +32,18 @@ public class Hand {
 		}
 		return counter;
 	}
-	
+
 	public void clearHand() {
 		hand = new ArrayList<Card>();
 	}
+
 	public Card getTopCard() {
 		return hand.get(0);
 	}
 
 	@Override
 	public String toString() {
-		return  hand.toString();
+		return hand.toString();
 	}
-	
-	
-	
+
 }

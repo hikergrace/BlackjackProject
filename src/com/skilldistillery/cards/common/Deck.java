@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-
 public class Deck {
 	private List<Card> deck;
 
@@ -36,6 +34,6 @@ public class Deck {
 	}
 
 	public void addCard(Card dealt) {
-		
+
 	}
 }

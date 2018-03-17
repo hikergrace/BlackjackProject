@@ -1,10 +1,9 @@
 package com.skilldistillery.cards.common;
 
-
 public class Card {
 	private Rank rank;
 	private Suit suit;
-	
+
 	public int getValue() {
 		return rank.getValue();
 	}
@@ -14,11 +13,11 @@ public class Card {
 		this.rank = rank;
 		this.suit = suit;
 	}
-	
+
 	public String toString() {
 		return rank.toString() + " of " + suit;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,7 +50,5 @@ public class Card {
 	public Suit getSuit() {
 		return suit;
 	}
-
-
 
 }

@@ -2,7 +2,6 @@ package com.skilldistillery.cards.blackjack;
 
 import java.util.Scanner;
 
-import com.skilldistillery.cards.common.Card;
 import com.skilldistillery.cards.common.Deck;
 
 public class Game {
@@ -11,7 +10,19 @@ public class Game {
 	private Deck deck = new Deck();
 
 	public void start(Scanner scanner) {
+		if (dealer.getDeck().checkDeckSize() <= 9) {
+			dealer.dealerGetNewDeck();
+			System.out.println("You are starting a new deck.");
+		}
 		dealer.getDeck().shuffle();
+
+		System.out.println("Would you like to play? Please type yes or no.");
+		String playerYN = scanner.next();
+
+		if (playerYN.equalsIgnoreCase("No")) {
+			System.out.println("Thanks for playing!");
+			System.exit(0);
+		}
 
 		player.getHand().addCard(dealer.getDeck().dealCard());
 		dealer.getHand().addCard(dealer.getDeck().dealCard());
@@ -30,27 +41,46 @@ public class Game {
 			System.out.println(
 					"Your hand is: " + player.getHand() + " and the value is " + player.getHand().getValueOfHand());
 			if (player.playerBusted()) {
-				System.out.println("You busted 21. We're starting a new hand.");
-				player.getHand().clearHand();
-				start(scanner);
+				System.out.println("You busted 21. Sorry, you lose. ");
+				clearRound(scanner);
 			}
 			System.out.println("Player, do you want to HIT or STAY (type hit or stay)");
 			playerChoice = scanner.next();
 		}
-		if (dealer.getValueOfHand() < 17) {
+		while (dealer.getValueOfHand() < 17) {
 			dealerHit();
 			System.out.println("The dealer's hand is " + dealer.getHand() + " and the value is "
 					+ dealer.getHand().getValueOfHand());
+			if (dealer.dealerBusted()) {
+				System.out.println("Dealer busted 21. You WON!");
+				clearRound(scanner);
+			}
 		}
 
-		checkIfPlayerWon();
+		if (dealer.getHand().getValueOfHand() == 21 && player.getHand().getValueOfHand() == 21) {
+			System.out.println("Tied Game!");
+			clearRound(scanner);
+		}
 
-		// PLAYER CHOOSING STAY
+		if (dealer.dealerBusted()) {
+			System.out.println("Dealer busted 21. You WON!");
+			clearRound(scanner);
+		}
+		if (checkIfPlayerWon()) {
+			System.out.println("You beat the dealer with a hand of " + player.getHand().getValueOfHand()
+					+ " to the dealer's hand of " + dealer.getHand().getValueOfHand() + ". Way to go!");
+			clearRound(scanner);
+		} else {
+			System.out.println("You lost to the dealer with a hand of " + player.getHand().getValueOfHand()
+					+ " to the dealer's hand of " + dealer.getHand().getValueOfHand() + ". Better luck next time.");
+			clearRound(scanner);
+
+		}
+
 		if (playerChoice.equalsIgnoreCase("stay")) {
 			System.out.println(
 					"Your hand is: " + player.getHand() + " and the value is " + player.getHand().getValueOfHand());
 		}
-
 	}
 
 	public void playerHit() {
@@ -59,18 +89,19 @@ public class Game {
 
 	public void dealerHit() {
 		dealer.getHand().addCard(dealer.getDeck().dealCard());
+	}
 
+	public void clearRound(Scanner scanner) {
+		dealer.getHand().clearHand();
+		player.getHand().clearHand();
+		start(scanner);
 	}
 
 	public boolean checkIfPlayerWon() {
-		if (dealer.dealerBusted()) {
-			System.out.println(
-					"Your hand is: " + player.getHand() + " and the value is " + player.getHand().getValueOfHand());
-			System.out.println("You busted 21 and lost");
+		if ((player.getHand().getValueOfHand() > dealer.getHand().getValueOfHand())
+				&& player.getHand().getValueOfHand() <= 21) {
 			return true;
-		} else {
-			return false;
 		}
-
+		return false;
 	}
 }

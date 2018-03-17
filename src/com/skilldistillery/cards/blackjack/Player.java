@@ -2,7 +2,7 @@ package com.skilldistillery.cards.blackjack;
 
 import com.skilldistillery.cards.common.Card;
 
-public class Player{
+public class Player {
 	private String name;
 	private Hand hand;
 	private double wallet;
@@ -40,7 +40,7 @@ public class Player{
 	public void setWallet(double wallet) {
 		this.wallet = wallet;
 	}
-	
+
 	public int getValueOfHand() {
 		int counter = 0;
 		for (Card card : hand.getCardsInHand()) {
@@ -48,12 +48,11 @@ public class Player{
 		}
 		return counter;
 	}
-	
+
 	public boolean playerBusted() {
 		if (getValueOfHand() > 21) {
 			return true;
 		}
 		return false;
+	}
 }
-}
-
